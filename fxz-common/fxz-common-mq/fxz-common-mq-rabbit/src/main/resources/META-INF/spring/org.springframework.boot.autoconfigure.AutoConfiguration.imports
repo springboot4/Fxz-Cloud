@@ -1,0 +1,2 @@
+com.fxz.common.mq.rabbit.config.RabbitConfig
+com.fxz.common.mq.rabbit.dynamic.RabbitModuleProperties

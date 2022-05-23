@@ -1,6 +1,7 @@
 package com.fxz.gateway.configure;
 
 import com.fxz.gateway.handler.FxzGatewayExceptionHandler;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

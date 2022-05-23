@@ -1,6 +1,7 @@
 package com.fxz.common.security.config;
 
 import com.fxz.common.core.constant.FxzConstant;
+import com.fxz.common.core.constant.SecurityConstants;
 import com.fxz.common.security.FxzUserInfoTokenServices;
 import com.fxz.common.security.handler.FxzAccessDeniedHandler;
 import com.fxz.common.security.handler.FxzAuthExceptionEntryPoint;
@@ -8,27 +9,53 @@ import com.fxz.common.security.permission.PermissionService;
 import com.fxz.common.security.properties.FxzCloudSecurityProperties;
 import com.fxz.common.security.util.SecurityUtil;
 import feign.RequestInterceptor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.util.Base64Utils;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.DispatcherServlet;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 /**
  * @author Fxz
  * @version 1.0
  * @date 2022-03-06 18:15
  */
+@Slf4j
+@AutoConfiguration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties(FxzCloudSecurityProperties.class)
 public class FxzCloudSecurityAutoConfigure {
+
+	/**
+	 * 解决SecurityContextHolder子线程不能获取用户信息
+	 */
+	@Bean
+	public MethodInvokingFactoryBean methodInvokingFactoryBean() {
+		MethodInvokingFactoryBean methodInvokingFactoryBean = new MethodInvokingFactoryBean();
+		methodInvokingFactoryBean.setTargetClass(SecurityContextHolder.class);
+		methodInvokingFactoryBean.setTargetMethod("setStrategyName");
+		methodInvokingFactoryBean.setArguments(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
+		return methodInvokingFactoryBean;
+	}
 
 	/**
 	 * 接口权限判断工具
@@ -41,8 +68,8 @@ public class FxzCloudSecurityAutoConfigure {
 	/**
 	 * 用于处理403类型异常
 	 */
+	@Primary
 	@Bean
-	@ConditionalOnMissingBean(name = "accessDeniedHandler")
 	public FxzAccessDeniedHandler accessDeniedHandler() {
 		return new FxzAccessDeniedHandler();
 	}
@@ -50,8 +77,8 @@ public class FxzCloudSecurityAutoConfigure {
 	/**
 	 * 用于处理401类型异常
 	 */
+	@Primary
 	@Bean
-	@ConditionalOnMissingBean(name = "authenticationEntryPoint")
 	public FxzAuthExceptionEntryPoint authenticationEntryPoint() {
 		return new FxzAuthExceptionEntryPoint();
 	}
@@ -88,11 +115,44 @@ public class FxzCloudSecurityAutoConfigure {
 		return requestTemplate -> {
 			String gatewayToken = new String(Base64Utils.encode(FxzConstant.GATEWAY_TOKEN_VALUE.getBytes()));
 			requestTemplate.header(FxzConstant.GATEWAY_TOKEN_HEADER, gatewayToken);
+
 			String authorizationToken = SecurityUtil.getCurrentTokenValue();
 			if (StringUtils.isNotBlank(authorizationToken)) {
 				requestTemplate.header(HttpHeaders.AUTHORIZATION, FxzConstant.OAUTH2_TOKEN_TYPE + authorizationToken);
 			}
+
+			RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+			if (requestAttributes != null) {
+				ServletRequestAttributes attributes = (ServletRequestAttributes) requestAttributes;
+				HttpServletRequest request = attributes.getRequest();
+				// 获取请求头
+				Enumeration<String> headerNames = request.getHeaderNames();
+				if (headerNames != null) {
+					while (headerNames.hasMoreElements()) {
+						String name = headerNames.nextElement();
+						String values = request.getHeader(name);
+						if (name.equals(HttpHeaders.AUTHORIZATION.toLowerCase())
+								&& values.contains(SecurityConstants.BASIC_PREFIX.trim())
+								|| name.equals(HttpHeaders.CONTENT_LENGTH.toLowerCase())) {
+							continue;
+						}
+						// 将请求头保存到模板中
+						requestTemplate.header(name, values);
+					}
+				}
+			}
 		};
+	}
+
+	/**
+	 * 让DispatcherServlet向子线程传递RequestContext
+	 * @param servlet servlet
+	 * @return 注册bean
+	 */
+	@Bean
+	public ServletRegistrationBean<DispatcherServlet> dispatcherRegistration(DispatcherServlet servlet) {
+		servlet.setThreadContextInheritable(true);
+		return new ServletRegistrationBean<>(servlet, "/**");
 	}
 
 }

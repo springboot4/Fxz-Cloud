@@ -5,10 +5,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fxz.common.core.enums.DictTypeEnum;
+import com.fxz.common.mp.result.Result;
 import com.fxz.system.dto.DictItemDto;
+import com.fxz.system.entity.Dict;
 import com.fxz.system.entity.DictItem;
 import com.fxz.system.mapper.DictItemMapper;
+import com.fxz.system.mapper.DictMapper;
 import com.fxz.system.service.DictItemService;
+import com.fxz.system.service.DictService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +34,8 @@ public class DictItemServiceImpl extends ServiceImpl<DictItemMapper, DictItem> i
 
 	private final DictItemMapper dictItemMapper;
 
+	private final DictMapper dictMapper;
+
 	/**
 	 * 添加
 	 */
@@ -44,11 +51,16 @@ public class DictItemServiceImpl extends ServiceImpl<DictItemMapper, DictItem> i
 	 * 修改
 	 */
 	@Override
-	public Boolean updateDictItem(DictItemDto dictItemDto) {
+	public Result<Void> updateDictItem(DictItemDto dictItemDto) {
+		Dict dict = dictMapper.selectById(dictItemDto.getDictId());
+		if (DictTypeEnum.SYSTEM.getType().equals(dict.getSystemFlag())) {
+			return Result.failed("系统内置字典，不可修改!");
+		}
+
 		DictItem dictItem = new DictItem();
 		BeanUtils.copyProperties(dictItemDto, dictItem);
 		dictItemMapper.updateById(dictItem);
-		return Boolean.TRUE;
+		return Result.success();
 	}
 
 	/**
@@ -82,9 +94,15 @@ public class DictItemServiceImpl extends ServiceImpl<DictItemMapper, DictItem> i
 	 * 删除
 	 */
 	@Override
-	public Boolean deleteDictItem(Long id) {
+	public Result<Void> deleteDictItem(Long id) {
+		DictItem item = this.getById(id);
+		Dict dict = dictMapper.selectById(item.getDictId());
+		if (DictTypeEnum.SYSTEM.getType().equals(dict.getSystemFlag())) {
+			return Result.failed("系统内置字典，不可删除!");
+		}
+
 		dictItemMapper.deleteById(id);
-		return Boolean.TRUE;
+		return Result.success();
 	}
 
 	/**

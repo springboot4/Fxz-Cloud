@@ -5,6 +5,7 @@ import com.fxz.common.core.exception.FxzException;
 import com.fxz.common.mp.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
@@ -27,6 +28,7 @@ import java.util.Set;
  * @date 2021-11-28 11:42
  */
 @Slf4j
+@AutoConfiguration
 @RestControllerAdvice
 public class BaseExceptionHandler {
 
@@ -78,6 +80,13 @@ public class BaseExceptionHandler {
 	public Result<Void> handleFxzAuthException(Exception e) {
 		log.error("认证错误", e);
 		return Result.failed("认证错误");
+	}
+
+	@ExceptionHandler(value = RuntimeException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public Result<Void> handleRuntimeException(Exception e) {
+		log.error("系统内部异常，异常信息", e);
+		return Result.failed(e.getMessage());
 	}
 
 	@ExceptionHandler(value = Exception.class)

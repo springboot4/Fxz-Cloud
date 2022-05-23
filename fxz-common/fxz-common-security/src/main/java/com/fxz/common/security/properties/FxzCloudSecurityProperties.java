@@ -1,6 +1,7 @@
 package com.fxz.common.security.properties;
 
 import cn.hutool.core.util.ReUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -65,7 +66,7 @@ public class FxzCloudSecurityProperties implements InitializingBean {
 	public void afterPropertiesSet() {
 		List<String> list = new ArrayList<>();
 
-		RequestMappingHandlerMapping mapping = webApplicationContext.getBean(RequestMappingHandlerMapping.class);
+		RequestMappingHandlerMapping mapping = SpringUtil.getBean("requestMappingHandlerMapping");
 		Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 
 		map.keySet().forEach(info -> {

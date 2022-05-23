@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fxz.common.mp.base.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
@@ -14,6 +15,7 @@ import java.io.Serializable;
  * @version 1.0
  * @date 2022-02-27 17:48
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("sys_role")
 public class Role extends BaseEntity implements Serializable {
@@ -35,6 +37,16 @@ public class Role extends BaseEntity implements Serializable {
 	 * 角色描述
 	 */
 	private String remark;
+
+	/**
+	 * 数据权限范围
+	 */
+	private Integer dataScope;
+
+	/**
+	 * 数据范围(指定部门数组)
+	 */
+	private String dataScopeDeptIds;
 
 	/**
 	 * 角色拥有的菜单id

@@ -13,10 +13,17 @@
     <artifactId>fxz-server-system-api</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.fxz</groupId>
             <artifactId>fxz-common-core</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>

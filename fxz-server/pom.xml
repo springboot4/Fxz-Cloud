@@ -13,7 +13,6 @@
 
     <modules>
         <module>fxz-server-system</module>
-        <module>fxz-server-test</module>
     </modules>
 
 </project>

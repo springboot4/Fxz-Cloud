@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.fxz.common.core.exception.FxzException;
 import com.fxz.system.entity.Dept;
 
+import java.util.List;
+
 /**
  * @author Fxz
  * @version 1.0
@@ -25,5 +27,10 @@ public interface IDeptService extends IService<Dept> {
 	 * 保存部门信息
 	 */
 	Boolean addDept(Dept dept);
+
+	/**
+	 * 根据Pid查询下级部门
+	 */
+	List<Dept> getDeptsByParentId(Long pId);
 
 }

@@ -106,4 +106,31 @@
                , u.last_login_time, u.update_time, u.description, u.avatar
     </select>
 
+    <!--通过用户名查找用户信息-->
+    <select id="findByMobile" parameterType="string" resultType="com.fxz.system.entity.SystemUser">
+        SELECT u.user_id                 userId,
+               u.username,
+               u.email,
+               u.mobile,
+               u.password,
+               u.status,
+               u.create_time             createTime,
+               u.ssex                    sex,
+               u.dept_id                 deptId,
+               u.last_login_time         lastLoginTime,
+               u.update_time             updateTime,
+               u.description,
+               u.avatar,
+               d.dept_name               deptName,
+               GROUP_CONCAT(distinct r.role_id)   roleId,
+               GROUP_CONCAT(distinct r.ROLE_NAME) roleName
+        FROM sys_user u
+                 LEFT JOIN sys_dept d ON (u.dept_id = d.dept_id)
+                 LEFT JOIN sys_user_role ur ON (u.user_id = ur.user_id)
+                 LEFT JOIN sys_role r ON r.role_id = ur.role_id
+        WHERE u.mobile = #{mobile}
+        group by u.username, u.user_id, u.email, u.mobile, u.password, u.status, u.create_time, u.ssex, u.dept_id
+               , u.last_login_time, u.update_time, u.description, u.avatar
+    </select>
+
 </mapper>

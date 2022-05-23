@@ -1,16 +1,20 @@
 package com.fxz.system.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fxz.common.core.exception.FxzException;
+import com.fxz.common.dataPermission.annotation.DataPermission;
 import com.fxz.system.entity.Dept;
 import com.fxz.system.mapper.DeptMapper;
 import com.fxz.system.service.IDeptService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Fxz
@@ -50,6 +54,34 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements ID
 	@Override
 	public Boolean addDept(Dept dept) {
 		return this.getBaseMapper().insert(dept) > 0;
+	}
+
+	/**
+	 * 根据Pid查询下级部门 避免数据权限查询时循环调用
+	 */
+	@DataPermission(enable = false)
+	@Cacheable(value = "fxz_cloud:dept:", key = "#pId", unless = "#result==null")
+	@Override
+	public List<Dept> getDeptsByParentId(Long pId) {
+		Dept dept = this.baseMapper.getDeptsByParentId(pId);
+
+		List<Dept> list = treeToList(dept);
+		return list;
+	}
+
+	private List<Dept> treeToList(Dept dept) {
+		LinkedList<Dept> list = new LinkedList<>();
+		list.add(dept);
+		List<Dept> children = dept.getChildren();
+		if (CollectionUtils.isNotEmpty(children)) {
+			children.forEach(item -> {
+				List<Dept> depts = treeToList(item);
+				if (CollectionUtils.isNotEmpty(depts)) {
+					list.addAll(depts);
+				}
+			});
+		}
+		return list;
 	}
 
 }

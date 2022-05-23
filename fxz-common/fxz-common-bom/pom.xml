@@ -10,27 +10,84 @@
     <version>0.0.1</version>
 
     <properties>
-        <common.version>${project.version}</common.version>
         <redisson.version>3.17.0</redisson.version>
         <myabtis-plus.version>3.5.1</myabtis-plus.version>
         <dynamic-ds.version>3.5.1</dynamic-ds.version>
         <aws.version>1.11.543</aws.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <fastjson.version>1.2.62</fastjson.version>
-        <hutool-all.version>5.7.16</hutool-all.version>
         <spring-boot-admin.version>2.6.3</spring-boot-admin.version>
-        <kaptcha.version>2.3.2</kaptcha.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
         <sentinel.version>1.6.3</sentinel.version>
         <logstash.version>5.3</logstash.version>
         <velocity.version>2.3</velocity.version>
         <p6spy.version>3.8.1</p6spy.version>
+        <hutool.version>5.7.21</hutool.version>
+        <seata.version>1.4.2</seata.version>
+        <weixin-java.version>4.1.5.B</weixin-java.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
         <security.oauth.version>2.1.8.RELEASE</security.oauth.version>
+        <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
+        <aliyun.java.sdk.core.version>4.5.25</aliyun.java.sdk.core.version>
+        <aliyun.java.sdk.dysmsapi.version>2.1.0</aliyun.java.sdk.dysmsapi.version>
     </properties>
 
     <!-- 定义全局jar版本-->
     <dependencyManagement>
         <dependencies>
+            <!-- 解决 ThreadLocal 父子线程的传值问题 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-sequence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-seata</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-mq-rabbit</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-data-permission</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-jackson</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-idempotent</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>${weixin-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>${hutool.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
@@ -53,43 +110,48 @@
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
                 <artifactId>fxz-common-core</artifactId>
-                <version>${common.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
                 <artifactId>fxz-common-database</artifactId>
-                <version>${common.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
                 <artifactId>fxz-common-file</artifactId>
-                <version>${common.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
                 <artifactId>fxz-common-mp</artifactId>
-                <version>${common.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
                 <artifactId>fxz-common-mq</artifactId>
-                <version>${common.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
                 <artifactId>fxz-common-redis</artifactId>
-                <version>${common.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
                 <artifactId>fxz-common-security</artifactId>
-                <version>${common.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
                 <artifactId>fxz-server-system-api</artifactId>
-                <version>${common.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -102,19 +164,19 @@
                 <version>${fastjson.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool-all.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-starter-client</artifactId>
                 <version>${spring-boot-admin.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.penggle</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${kaptcha.version}</version>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-serializer-kryo</artifactId>
+                <version>${seata.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba.csp</groupId>
@@ -156,6 +218,16 @@
                 <groupId>org.springframework.security.oauth.boot</groupId>
                 <artifactId>spring-security-oauth2-autoconfigure</artifactId>
                 <version>${security.oauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun.java.sdk.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+                <version>${aliyun.java.sdk.dysmsapi.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

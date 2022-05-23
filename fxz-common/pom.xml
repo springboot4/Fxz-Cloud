@@ -22,6 +22,12 @@
         <module>fxz-common-redis</module>
         <module>fxz-common-security</module>
         <module>fxz-common-database</module>
+        <module>fxz-common-idempotent</module>
+        <module>fxz-common-data-permission</module>
+        <module>fxz-common-jackson</module>
+        <module>fxz-common-seata</module>
+        <module>fxz-common-sms</module>
+        <module>fxz-common-sequence</module>
     </modules>
 
 </project>

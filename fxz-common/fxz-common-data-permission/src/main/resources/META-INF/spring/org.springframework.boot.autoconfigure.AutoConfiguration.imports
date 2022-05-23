@@ -1,0 +1,3 @@
+com.fxz.common.dataPermission.config.DataPermissionAutoConfiguration
+com.fxz.common.dataPermission.dept.config.DeptDataPermissionAutoConfiguration
+com.fxz.common.dataPermission.dept.service.DeptDataPermissionFrameworkService

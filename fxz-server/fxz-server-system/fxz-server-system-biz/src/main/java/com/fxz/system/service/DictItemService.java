@@ -3,6 +3,7 @@ package com.fxz.system.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fxz.common.mp.result.Result;
 import com.fxz.system.dto.DictItemDto;
 import com.fxz.system.entity.DictItem;
 
@@ -24,7 +25,7 @@ public interface DictItemService extends IService<DictItem> {
 	/**
 	 * 修改
 	 */
-	Boolean updateDictItem(DictItemDto dictItemDto);
+	Result<Void> updateDictItem(DictItemDto dictItemDto);
 
 	/**
 	 * 分页
@@ -44,7 +45,7 @@ public interface DictItemService extends IService<DictItem> {
 	/**
 	 * 删除
 	 */
-	Boolean deleteDictItem(Long id);
+	Result<Void> deleteDictItem(Long id);
 
 	/**
 	 * 校验字典项编码是否已经被使用

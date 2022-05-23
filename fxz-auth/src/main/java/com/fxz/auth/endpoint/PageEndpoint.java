@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping("/token")
 public class PageEndpoint {
 
-	private final ClientDetailsService clientDetailsService;
+	private final ClientDetailsService fxzClientDetailsService;
 
 	/**
 	 * 认证页面
@@ -48,7 +48,8 @@ public class PageEndpoint {
 		Object auth = session.getAttribute("authorizationRequest");
 		if (auth != null) {
 			AuthorizationRequest authorizationRequest = (AuthorizationRequest) auth;
-			ClientDetails clientDetails = clientDetailsService.loadClientByClientId(authorizationRequest.getClientId());
+			ClientDetails clientDetails = fxzClientDetailsService
+					.loadClientByClientId(authorizationRequest.getClientId());
 			modelAndView.addObject("app", clientDetails.getAdditionalInformation());
 			modelAndView.addObject("user", SecurityUtil.getUser());
 		}

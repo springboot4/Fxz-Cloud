@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fxz-common</artifactId>
+        <groupId>com.fxz</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <description>发号器模块</description>
+    <artifactId>fxz-common-sequence</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-mp</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

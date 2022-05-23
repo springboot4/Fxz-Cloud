@@ -8,7 +8,6 @@ import com.fxz.common.security.properties.FxzCloudSecurityProperties;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -21,39 +20,25 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  * @version 1.0
  * @date 2022-03-06 18:10
  */
-@EnableResourceServer
 @RequiredArgsConstructor
+@EnableResourceServer
 public class FxzCloudResourceServerConfigure extends ResourceServerConfigurerAdapter {
 
 	/**
 	 * 资源服务器属性配置
 	 */
-	private FxzCloudSecurityProperties properties;
+	private final FxzCloudSecurityProperties properties;
 
 	/**
 	 * 用于处理403类型异常
 	 */
-	private FxzAccessDeniedHandler fxzAccessDeniedHandler;
+
+	private final FxzAccessDeniedHandler fxzAccessDeniedHandler;
 
 	/**
 	 * 用于处理401类型异常
 	 */
-	private FxzAuthExceptionEntryPoint fxzAuthExceptionEntryPoint;
-
-	@Autowired(required = false)
-	public void setProperties(FxzCloudSecurityProperties properties) {
-		this.properties = properties;
-	}
-
-	@Autowired(required = false)
-	public void setAccessDeniedHandler(FxzAccessDeniedHandler accessDeniedHandler) {
-		this.fxzAccessDeniedHandler = accessDeniedHandler;
-	}
-
-	@Autowired(required = false)
-	public void setExceptionEntryPoint(FxzAuthExceptionEntryPoint exceptionEntryPoint) {
-		this.fxzAuthExceptionEntryPoint = exceptionEntryPoint;
-	}
+	private final FxzAuthExceptionEntryPoint fxzAuthExceptionEntryPoint;
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
@@ -79,12 +64,7 @@ public class FxzCloudResourceServerConfigure extends ResourceServerConfigurerAda
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) {
-		if (fxzAuthExceptionEntryPoint != null) {
-			resources.authenticationEntryPoint(fxzAuthExceptionEntryPoint);
-		}
-		if (fxzAccessDeniedHandler != null) {
-			resources.accessDeniedHandler(fxzAccessDeniedHandler);
-		}
+		resources.authenticationEntryPoint(fxzAuthExceptionEntryPoint).accessDeniedHandler(fxzAccessDeniedHandler);
 	}
 
 	private void permitAll(HttpSecurity http) throws Exception {

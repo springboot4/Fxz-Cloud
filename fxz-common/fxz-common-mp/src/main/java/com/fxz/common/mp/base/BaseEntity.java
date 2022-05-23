@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 所有数据库实体均继承此类 数据库均含有以下审计字段
+ * 数据库实体继承此类 数据库需含有以下审计字段
  *
  * @author fxz
  */

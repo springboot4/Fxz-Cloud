@@ -35,4 +35,11 @@ public interface UserMapper extends BaseMapper<SystemUser> {
 	 */
 	SystemUser findByName(String username);
 
+	/**
+	 * 通过手机号查找用户信息
+	 * @param mobile 手机号
+	 * @return 用户信息
+	 */
+	SystemUser findByMobile(String mobile);
+
 }

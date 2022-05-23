@@ -8,6 +8,8 @@
             r.role_id,
             r.role_name,
             r.remark,
+            r.data_scope,
+            r.data_scope_dept_ids,
             r.create_time,
             r.update_time,
             GROUP_CONCAT( rm.MENU_ID ) menuId

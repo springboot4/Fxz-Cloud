@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fxz.common.core.enums.DictTypeEnum;
+import com.fxz.common.mp.result.Result;
 import com.fxz.system.dto.DictDto;
 import com.fxz.system.entity.Dict;
 import com.fxz.system.entity.DictItem;
@@ -48,11 +50,14 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 	 * 修改
 	 */
 	@Override
-	public Boolean updateDict(DictDto dictDto) {
+	public Result<Void> updateDict(DictDto dictDto) {
+		if (DictTypeEnum.SYSTEM.getType().equals(dictDto.getSystemFlag())) {
+			return Result.failed("系统内置字典，不可修改!");
+		}
 		Dict dict = new Dict();
 		BeanUtils.copyProperties(dictDto, dict);
 		dictMapper.updateById(dict);
-		return Boolean.TRUE;
+		return Result.success();
 	}
 
 	/**
@@ -85,12 +90,17 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 	 * 删除
 	 */
 	@Override
-	public Boolean deleteDict(Long id) {
+	public Result<Void> deleteDict(Long id) {
+		Dict dict = this.getById(id);
+		if (DictTypeEnum.SYSTEM.getType().equals(dict.getSystemFlag())) {
+			return Result.failed("系统内置字典，不可删除!");
+		}
+
 		// 删除所有字典项
 		dictItemService.remove(Wrappers.<DictItem>lambdaQuery().eq(DictItem::getDictId, id));
 		// 删除字典
 		dictMapper.deleteById(id);
-		return Boolean.TRUE;
+		return Result.success();
 	}
 
 	/**

@@ -6,9 +6,9 @@ import com.fxz.system.entity.OperLog;
 import com.fxz.system.feign.RemoteLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.stereotype.Service;
 
 /**
  * 异步操作日志服务
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @EnableAsync
-@Service
+@AutoConfiguration
 public class AsyncLogService {
 
 	@Autowired

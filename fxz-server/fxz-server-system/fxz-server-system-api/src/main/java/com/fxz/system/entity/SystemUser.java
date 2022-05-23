@@ -6,10 +6,13 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fxz.common.core.annotation.IsMobile;
+import com.fxz.common.core.annotation.CheckMobileValid;
+import com.fxz.common.core.enums.SensitiveType;
+import com.fxz.common.core.sensitive.SensitiveInfo;
 import com.fxz.common.mp.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
@@ -23,6 +26,7 @@ import java.util.Date;
  * @version 1.0
  * @date 2021-11-28 15:22
  */
+@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("sys_user")
@@ -43,12 +47,12 @@ public class SystemUser extends BaseEntity implements Serializable {
 	/**
 	 * 默认头像
 	 */
-	public static final String DEFAULT_AVATAR = "https://preview.pro.antdv.com/avatar2.jpg";
+	public static final String DEFAULT_AVATAR = "";
 
 	/**
 	 * 默认密码
 	 */
-	public static final String DEFAULT_PASSWORD = "1234qwer";
+	public static final String DEFAULT_PASSWORD = "123456";
 
 	/**
 	 * 性别男
@@ -68,47 +72,43 @@ public class SystemUser extends BaseEntity implements Serializable {
 	/**
 	 * 用户 ID
 	 */
-	@TableId(value = "USER_ID", type = IdType.AUTO)
+	@TableId(type = IdType.AUTO)
 	private Long userId;
 
 	/**
 	 * 用户名
 	 */
-	@Size(min = 4, max = 10, message = "{range}")
-	@TableField("USERNAME")
+	@Size(min = 3, max = 10, message = "{range}")
 	private String username;
 
 	/**
 	 * 密码
 	 */
-	@TableField("PASSWORD")
 	private String password;
 
 	/**
 	 * 部门 ID
 	 */
-	@TableField("DEPT_ID")
 	private Long deptId;
 
 	/**
 	 * 邮箱
 	 */
+	@SensitiveInfo(SensitiveType.EMAIL)
 	@Email(message = "{email}")
-	@TableField("EMAIL")
 	private String email;
 
 	/**
 	 * 联系电话
 	 */
-	@IsMobile(message = "{mobile}")
-	@TableField("MOBILE")
+	@SensitiveInfo(SensitiveType.MOBILE_PHONE)
+	@CheckMobileValid(message = "{mobile}")
 	private String mobile;
 
 	/**
 	 * 状态 0锁定 1有效
 	 */
 	@NotBlank(message = "{required}")
-	@TableField("STATUS")
 	private String status;
 
 	/**
@@ -116,27 +116,24 @@ public class SystemUser extends BaseEntity implements Serializable {
 	 */
 	@DateTimeFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
 	@JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN, timezone = "GMT+8")
-	@TableField("LAST_LOGIN_TIME")
 	private Date lastLoginTime;
 
 	/**
 	 * 性别 0男 1女 2 保密
 	 */
+	@TableField(value = "ssex")
 	@NotBlank(message = "{required}")
-	@TableField("SSEX")
 	private String sex;
 
 	/**
 	 * 头像
 	 */
-	@TableField("AVATAR")
 	private String avatar;
 
 	/**
 	 * 描述
 	 */
 	@Size(max = 100, message = "{noMoreThan}")
-	@TableField("DESCRIPTION")
 	private String description;
 
 	/**

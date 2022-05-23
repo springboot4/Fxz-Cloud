@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <artifactId>hutool-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>

@@ -15,8 +15,8 @@
 
         <!--验证码-->
         <dependency>
-            <groupId>com.github.penggle</groupId>
-            <artifactId>kaptcha</artifactId>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
         </dependency>
 
         <!--gateway 网关依赖,内置webflux 依赖-->

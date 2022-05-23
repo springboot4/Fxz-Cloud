@@ -14,4 +14,10 @@ import java.lang.annotation.*;
 @Documented
 public @interface Ojbk {
 
+	/**
+	 * 是否只允许内部服务间调用
+	 * @return false, true
+	 */
+	boolean inner() default false;
+
 }

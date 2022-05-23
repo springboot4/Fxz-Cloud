@@ -2,20 +2,20 @@ package com.fxz.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fxz.common.core.param.PageParam;
-import com.fxz.system.entity.SystemUser;
-import com.fxz.system.entity.UserPost;
-import com.fxz.system.entity.UserRole;
+import com.fxz.system.entity.*;
 import com.fxz.system.mapper.UserMapper;
 import com.fxz.system.param.UserInfoParam;
-import com.fxz.system.service.IUserRoleService;
-import com.fxz.system.service.IUserService;
-import com.fxz.system.service.UserPostService;
+import com.fxz.system.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author fxz
@@ -35,6 +37,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SystemUser> impleme
 	private final UserPostService userPostService;
 
 	private final IUserRoleService userRoleService;
+
+	private final IRoleMenuService roleMenuService;
+
+	private final IMenuService menuService;
 
 	private final PasswordEncoder passwordEncoder;
 
@@ -63,6 +69,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SystemUser> impleme
 		}
 	}
 
+	@CacheEvict(value = "fxz_cloud:user", key = "#user.userId+':userInfo'")
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void updateUser(SystemUser user) {
@@ -103,6 +110,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SystemUser> impleme
 	/**
 	 * 根据用户id获取用户信息
 	 */
+	@Cacheable(value = "fxz_cloud:user", key = "#id+':userInfo'")
 	@Override
 	public SystemUser getUserById(Long id) {
 		return this.baseMapper.getUserById(id);
@@ -129,9 +137,46 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SystemUser> impleme
 	/**
 	 * 通过用户名查找用户信息
 	 */
+	@Cacheable(value = "fxz_cloud:user", key = "#username+':userInfo'")
 	@Override
 	public SystemUser findByName(String username) {
 		return this.baseMapper.findByName(username);
+	}
+
+	/**
+	 * 获取用户全部信息
+	 */
+	@Override
+	public UserInfo findUserInfo(SystemUser systemUser) {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setSysUser(systemUser);
+		List<UserRole> userRoles = userRoleService
+				.list(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getUserId, systemUser.getUserId()));
+		if (CollectionUtils.isNotEmpty(userRoles)) {
+			Set<Long> roleSet = userRoles.stream().map(UserRole::getRoleId).collect(Collectors.toSet());
+			List<RoleMenu> roleMenus = roleMenuService
+					.list(Wrappers.<RoleMenu>lambdaQuery().in(RoleMenu::getRoleId, roleSet));
+			if (CollectionUtils.isNotEmpty(roleMenus)) {
+				Set<Long> menuIds = roleMenus.stream().map(RoleMenu::getMenuId).collect(Collectors.toSet());
+				List<Menu> menus = menuService.list(Wrappers.<Menu>lambdaQuery().in(Menu::getId, menuIds));
+				if (CollectionUtils.isNotEmpty(menus)) {
+					List<String> permissions = menus.stream().map(Menu::getPerms).distinct()
+							.collect(Collectors.toList());
+					userInfo.setPermissions(permissions);
+				}
+			}
+		}
+		return userInfo;
+	}
+
+	/**
+	 * 通过手机号查找用户信息
+	 * @param mobile 手机号
+	 * @return 用户信息
+	 */
+	@Override
+	public SystemUser findByMobile(String mobile) {
+		return this.baseMapper.findByMobile(mobile);
 	}
 
 }

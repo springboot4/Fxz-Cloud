@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.fxz.common.mp.handler.DefaultFieldHandler;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Fxz
  * @version 1.0
  * @date 2022-03-25 17:26
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 public class MybatisPlusAutoConfiguration {
 
 	/**

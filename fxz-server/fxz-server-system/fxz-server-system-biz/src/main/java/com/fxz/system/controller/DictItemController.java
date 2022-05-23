@@ -36,16 +36,16 @@ public class DictItemController {
 	 * 修改
 	 */
 	@PostMapping(value = "/update")
-	public Result<Boolean> update(@RequestBody DictItemDto dictItemDto) {
-		return Result.success(dictItemService.updateDictItem(dictItemDto));
+	public Result<Void> update(@RequestBody DictItemDto dictItemDto) {
+		return dictItemService.updateDictItem(dictItemDto);
 	}
 
 	/**
 	 * 删除
 	 */
 	@DeleteMapping(value = "/delete")
-	public Result<Boolean> delete(Long id) {
-		return Result.judge(dictItemService.deleteDictItem(id));
+	public Result<Void> delete(Long id) {
+		return dictItemService.deleteDictItem(id);
 	}
 
 	/**

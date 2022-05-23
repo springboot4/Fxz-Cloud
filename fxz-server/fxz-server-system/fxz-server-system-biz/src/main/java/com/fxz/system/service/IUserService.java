@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fxz.common.core.param.PageParam;
 import com.fxz.system.entity.SystemUser;
+import com.fxz.system.entity.UserInfo;
 import com.fxz.system.param.UserInfoParam;
 
 /**
@@ -48,5 +49,17 @@ public interface IUserService extends IService<SystemUser> {
 	 * 通过用户名查找用户信息
 	 */
 	public SystemUser findByName(String username);
+
+	/**
+	 * 获取用户全部信息
+	 */
+	UserInfo findUserInfo(SystemUser systemUser);
+
+	/**
+	 * 通过手机号查找用户信息
+	 * @param mobile 手机号
+	 * @return 用户信息
+	 */
+	SystemUser findByMobile(String mobile);
 
 }

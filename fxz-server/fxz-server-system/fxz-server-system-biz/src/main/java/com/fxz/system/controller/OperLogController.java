@@ -26,7 +26,7 @@ public class OperLogController {
 	private final OperLogService operLogService;
 
 	/**
-	 * 保存日志 因为feign异步调用会丢失请求头 这里放开了权限校验
+	 * 保存日志
 	 */
 	@Ojbk
 	@PostMapping(value = "/add")

@@ -5,7 +5,7 @@ package com.fxz.common.core.constant;
  * @version 1.0
  * @date 2021-11-28 13:10
  */
-public class FxzConstant {
+public interface FxzConstant {
 
 	/**
 	 * GATEWAY请求头TOKEN名称（不要有空格）
@@ -68,5 +68,9 @@ public class FxzConstant {
 	public static final String CODE_PREFIX = "fxz.captcha.";
 
 	public static final String OAUTH2_TOKEN_TYPE = "Bearer ";
+
+	public static final String OAUTH2_TOKEN_TYPE_LOW = "bearer";
+
+	public static final Integer STATUS_YES = 1;
 
 }

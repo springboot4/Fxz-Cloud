@@ -12,6 +12,16 @@
         <collection property="children" column="{DEPT_ID = DEPT_ID}" select="getDeptByPid"/>
     </resultMap>
 
+    <select id="getDeptsByParentId" resultMap="dept">
+        select dept_id,
+               parent_id,
+               dept_name,
+               order_num,
+               create_time,
+               update_time
+        from sys_dept
+        WHERE dept_id = #{pId}
+    </select>
     <!--获取部门树-->
     <select id="getDeptTree" resultMap="dept">
         select dept_id,

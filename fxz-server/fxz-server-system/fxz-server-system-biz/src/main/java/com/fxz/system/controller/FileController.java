@@ -5,11 +5,11 @@ import com.fxz.common.log.annotation.OperLogAnn;
 import com.fxz.common.log.enums.BusinessType;
 import com.fxz.common.mp.result.PageResult;
 import com.fxz.common.mp.result.Result;
+import com.fxz.common.security.annotation.Ojbk;
 import com.fxz.system.dto.FileDto;
 import com.fxz.system.entity.File;
 import com.fxz.system.service.FileService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +22,6 @@ import java.util.List;
  * @author fxz
  * @date 2022-04-04
  */
-@Slf4j
 @RestController
 @RequestMapping("/file")
 @RequiredArgsConstructor
@@ -36,7 +35,6 @@ public class FileController {
 	@OperLogAnn(title = "文件管理", businessType = BusinessType.INSERT)
 	@PostMapping(value = "/add")
 	public Result<Object> add(@RequestPart("file") MultipartFile file) {
-		log.info("文件上传");
 		return Result.success(fileService.addFile(file));
 	}
 
@@ -46,6 +44,7 @@ public class FileController {
 	 * @param fileName 文件名
 	 * @param response 响应
 	 */
+	@Ojbk
 	@GetMapping("/{bucket}/{fileName}")
 	public void file(@PathVariable String bucket, @PathVariable String fileName, HttpServletResponse response) {
 		fileService.getFile(bucket, fileName, response);

@@ -19,6 +19,19 @@
         </dependency>
         <dependency>
             <groupId>com.fxz</groupId>
+            <artifactId>mall-user-api</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-extra</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fxz</groupId>
             <artifactId>fxz-common-core</artifactId>
         </dependency>
         <dependency>

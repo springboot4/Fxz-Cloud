@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.fxz.common.core.handler.BaseExceptionHandler,\
-  com.fxz.common.core.config.JacksonConfiguration

@@ -1,6 +1,6 @@
 package com.fxz.common.core.validator;
 
-import com.fxz.common.core.annotation.IsMobile;
+import com.fxz.common.core.annotation.CheckMobileValid;
 import com.fxz.common.core.constant.RegexpConstant;
 import com.fxz.common.core.utils.FxzUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -11,10 +11,10 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * @author fxz
  */
-public class MobileValidator implements ConstraintValidator<IsMobile, String> {
+public class MobileValidator implements ConstraintValidator<CheckMobileValid, String> {
 
 	@Override
-	public void initialize(IsMobile isMobile) {
+	public void initialize(CheckMobileValid isMobile) {
 	}
 
 	@Override

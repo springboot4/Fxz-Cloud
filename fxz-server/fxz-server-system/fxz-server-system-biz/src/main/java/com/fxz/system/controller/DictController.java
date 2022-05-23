@@ -41,8 +41,8 @@ public class DictController {
 	 */
 	@OperLogAnn(title = "字典管理", businessType = BusinessType.UPDATE)
 	@PostMapping(value = "/update")
-	public Result<Boolean> update(@RequestBody DictDto dictDto) {
-		return Result.success(dictService.updateDict(dictDto));
+	public Result<Void> update(@RequestBody DictDto dictDto) {
+		return dictService.updateDict(dictDto);
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class DictController {
 	 */
 	@OperLogAnn(title = "字典管理", businessType = BusinessType.DELETE)
 	@DeleteMapping(value = "/delete")
-	public Result<Boolean> delete(Long id) {
-		return Result.judge(dictService.deleteDict(id));
+	public Result<Void> delete(Long id) {
+		return dictService.deleteDict(id);
 	}
 
 	/**

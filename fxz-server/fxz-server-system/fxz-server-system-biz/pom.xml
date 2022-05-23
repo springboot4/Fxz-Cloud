@@ -11,11 +11,53 @@
     <artifactId>fxz-server-system-biz</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>mall-user-api</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-sequence</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-sms</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-jackson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-data-permission</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-idempotent</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.fxz</groupId>
             <artifactId>fxz-common-log</artifactId>
-            <version>0.0.1</version>
         </dependency>
+
         <!-- LB 扩展 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -62,6 +104,7 @@
             <groupId>com.fxz</groupId>
             <artifactId>fxz-common-security</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>

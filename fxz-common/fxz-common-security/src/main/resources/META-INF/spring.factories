@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.fxz.common.security.config.FxzCloudSecurityAutoConfigure,\
-  com.fxz.common.security.listener.AuthenticationEventListener
