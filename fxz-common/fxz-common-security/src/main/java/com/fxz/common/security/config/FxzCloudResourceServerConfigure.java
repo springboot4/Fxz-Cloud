@@ -32,7 +32,6 @@ public class FxzCloudResourceServerConfigure extends ResourceServerConfigurerAda
 	/**
 	 * 用于处理403类型异常
 	 */
-
 	private final FxzAccessDeniedHandler fxzAccessDeniedHandler;
 
 	/**

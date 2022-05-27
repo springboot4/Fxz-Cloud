@@ -21,7 +21,6 @@ public class RabbitConfig {
 
 	/**
 	 * 消息序列化配置
-	 * @param connectionFactory
 	 */
 	@Bean
 	public RabbitListenerContainerFactory<?> rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
@@ -31,7 +30,7 @@ public class RabbitConfig {
 		return factory;
 	}
 
-	/*
+	/**
 	 * 动态创建队列、交换机初始化器
 	 */
 	@Bean

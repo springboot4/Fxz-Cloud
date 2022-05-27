@@ -47,7 +47,7 @@ public class RabbitModuleInitializer implements SmartInitializingSingleton {
 			Queue queue = convertQueue(rabbitModuleInfo.getQueue());
 			// 交换机
 			Exchange exchange = convertExchange(rabbitModuleInfo.getExchange());
-			// 绑定关系
+			// 绑定关系x
 			String routingKey = rabbitModuleInfo.getRoutingKey();
 			String queueName = rabbitModuleInfo.getQueue().getName();
 			String exchangeName = rabbitModuleInfo.getExchange().getName();

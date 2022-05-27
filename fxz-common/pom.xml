@@ -28,6 +28,8 @@
         <module>fxz-common-seata</module>
         <module>fxz-common-sms</module>
         <module>fxz-common-sequence</module>
+        <module>fxz-common-es</module>
+        <module>fxz-common-canal</module>
     </modules>
 
 </project>

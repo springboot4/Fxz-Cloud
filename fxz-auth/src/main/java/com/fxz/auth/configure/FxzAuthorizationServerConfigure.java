@@ -43,6 +43,7 @@ import java.util.*;
  * @Description 认证服务器配置
  * @date 2021-11-27 16:10
  */
+@SuppressWarnings("rawtypes")
 @Configuration
 @EnableAuthorizationServer
 @RequiredArgsConstructor
@@ -151,7 +152,7 @@ public class FxzAuthorizationServerConfigure extends AuthorizationServerConfigur
 		tokenServices.setClientDetailsService(fxzClientDetailsService());
 
 		// 多用户体系下，认证客户端ID和 UserDetailService 的映射Map
-		Map<String, UserDetailsService> clientUserDetailsServiceMap = new HashMap<>();
+		Map<String, UserDetailsService> clientUserDetailsServiceMap = new HashMap<>(8);
 		// 系统管理客户端使用fxzUserDetailService加载用户信息
 		clientUserDetailsServiceMap.put(SecurityConstants.ADMIN_CLIENT_ID, fxzUserDetailService);
 		// Android、IOS、H5 移动客户端使用fxzMemberUserDetailsService加载用户信息

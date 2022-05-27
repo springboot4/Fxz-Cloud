@@ -59,7 +59,7 @@
 
         <dependency>
             <groupId>com.fxz</groupId>
-            <artifactId>fxz-server-system-api</artifactId>
+            <artifactId>fxz-system-api</artifactId>
         </dependency>
 
         <dependency>

@@ -13,7 +13,7 @@
         <module>fxz-common</module>
         <module>fxz-auth</module>
         <module>fxz-gateway</module>
-        <module>fxz-server</module>
+        <module>fxz-system</module>
         <module>fxz-generate</module>
         <module>fxz-Job</module>
     </modules>

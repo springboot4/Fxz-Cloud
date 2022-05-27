@@ -7,8 +7,9 @@
         <groupId>com.fxz</groupId>
         <version>0.0.1</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
+    <description>rabbit-mq模块</description>
     <artifactId>fxz-common-mq-rabbit</artifactId>
 
     <dependencies>

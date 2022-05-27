@@ -20,27 +20,27 @@ import reactor.core.publisher.Mono;
 public class FxzGatewayExceptionHandler implements ErrorWebExceptionHandler {
 
 	@Override
-	public Mono<Void> handle(ServerWebExchange exchange, Throwable throwable) {
+	public Mono<Void> handle(ServerWebExchange exchange, Throwable fxz) {
 		ServerHttpResponse response = exchange.getResponse();
 
 		if (exchange.getResponse().isCommitted()) {
-			return Mono.error(throwable);
+			return Mono.error(fxz);
 		}
 
 		String msg;
 
-		if (throwable instanceof NotFoundException) {
+		if (fxz instanceof NotFoundException) {
 			msg = "未找到该资源";
 		}
-		else if (throwable instanceof ResponseStatusException) {
-			ResponseStatusException responseStatusException = (ResponseStatusException) throwable;
+		else if (fxz instanceof ResponseStatusException) {
+			ResponseStatusException responseStatusException = (ResponseStatusException) fxz;
 			msg = responseStatusException.getMessage();
 		}
 		else {
 			msg = "内部服务器错误";
 		}
 
-		log.error("[网关异常处理]请求路径:{},异常信息:{}", exchange.getRequest().getPath(), throwable.getMessage());
+		log.error("[网关异常处理]请求路径:{},异常信息:{}", exchange.getRequest().getPath(), fxz.getMessage());
 
 		return WebFluxUtil.webFluxResponseWriter(response, msg);
 	}

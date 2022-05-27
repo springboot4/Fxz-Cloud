@@ -10,6 +10,8 @@
     <version>0.0.1</version>
 
     <properties>
+        <jakarta.version>2.0.1</jakarta.version>
+        <es-java.version>7.17.3</es-java.version>
         <redisson.version>3.17.0</redisson.version>
         <myabtis-plus.version>3.5.1</myabtis-plus.version>
         <dynamic-ds.version>3.5.1</dynamic-ds.version>
@@ -35,11 +37,31 @@
     <!-- 定义全局jar版本-->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>jakarta.json</groupId>
+                <artifactId>jakarta.json-api</artifactId>
+                <version>${jakarta.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>co.elastic.clients</groupId>
+                <artifactId>elasticsearch-java</artifactId>
+                <version>${es-java.version}</version>
+            </dependency>
             <!-- 解决 ThreadLocal 父子线程的传值问题 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
                 <version>${transmittable-thread-local.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-canal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-es</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
@@ -150,7 +172,7 @@
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
-                <artifactId>fxz-server-system-api</artifactId>
+                <artifactId>fxz-system-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

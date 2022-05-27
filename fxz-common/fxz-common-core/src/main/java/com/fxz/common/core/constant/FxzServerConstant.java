@@ -21,8 +21,6 @@ public interface FxzServerConstant {
 
 	public static final String FXZ_SERVER_SYSTEM = "fxz-server-system";
 
-	public static final String FXZ_SERVER_TEST = "fxz-server-system-test";
-
 	public static final String FXZ_MALL_PRODUCT = "fxz-mall-product";
 
 	public static final String FXZ_MALL_ORDER = "fxz-mall-order";

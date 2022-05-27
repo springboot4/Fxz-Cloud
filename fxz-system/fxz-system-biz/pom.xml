@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fxz-system</artifactId>
+        <groupId>com.fxz</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>fxz-system-biz</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-mq-rabbit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>mall-user-api</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-es</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-sequence</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-sms</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-jackson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-data-permission</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-idempotent</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-log</artifactId>
+        </dependency>
+
+        <!-- LB 扩展 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-system-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-file</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-redis</artifactId>
+        </dependency>
+
+      <!--  <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>-->
+
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-security</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>fxz-server-system</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
