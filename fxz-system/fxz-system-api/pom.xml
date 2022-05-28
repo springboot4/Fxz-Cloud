@@ -24,11 +24,6 @@
             <artifactId>fxz-common-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-canal</artifactId>
-        </dependency>
-
     </dependencies>
 
 </project>

@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fxz.common.canal.annotation.CanalModel;
-import com.fxz.common.canal.common.FieldNamingPolicy;
 import com.fxz.common.core.annotation.CheckMobileValid;
 import com.fxz.common.core.enums.SensitiveType;
 import com.fxz.common.core.sensitive.SensitiveInfo;
@@ -32,7 +30,6 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("sys_user")
-@CanalModel(database = "fxz_cloud_base", table = "sys_user", fieldNamingPolicy = FieldNamingPolicy.LOWER_UNDERSCORE)
 public class SystemUser extends BaseEntity implements Serializable {
 
 	/**
