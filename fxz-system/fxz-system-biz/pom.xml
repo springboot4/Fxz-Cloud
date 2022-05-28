@@ -90,16 +90,6 @@
             <artifactId>fxz-common-redis</artifactId>
         </dependency>
 
-      <!--  <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>-->
-
         <dependency>
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>

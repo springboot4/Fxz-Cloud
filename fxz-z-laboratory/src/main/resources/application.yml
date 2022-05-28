@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: fxz-z-laboratory
+  cloud:
+    nacos:
+      config:
+        server-addr: ${NACOS_HOST:fxz-nacos}:8848
+      discovery:
+        server-addr: ${NACOS_HOST:fxz-nacos}:8848
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yaml
