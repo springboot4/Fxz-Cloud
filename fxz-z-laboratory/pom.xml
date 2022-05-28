@@ -10,7 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>fxz-z-laboratory</artifactId>
-    <description>做一些测试</description>
+    <description>fxz laboratory</description>
 
     <dependencies>
 
