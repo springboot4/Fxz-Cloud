@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>fxz-common-jackson</artifactId>
+    <description>jackson模块</description>
 
     <dependencies>
 

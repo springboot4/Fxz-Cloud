@@ -8,10 +8,10 @@
         <version>0.0.1</version>
     </parent>
 
+    <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>fxz-common-mq</artifactId>
     <description>消息队列操作模块</description>
-    <packaging>pom</packaging>
 
     <modules>
         <module>fxz-common-mq-rabbit</module>

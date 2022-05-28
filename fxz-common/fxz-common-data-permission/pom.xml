@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>fxz-common-data-permission</artifactId>
+    <description>数据权限模块</description>
 
     <dependencies>
         <dependency>

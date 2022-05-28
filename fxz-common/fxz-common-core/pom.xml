@@ -9,8 +9,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <packaging>jar</packaging>
     <artifactId>fxz-common-core</artifactId>
+    <description>web开发相关</description>
 
     <dependencies>
 

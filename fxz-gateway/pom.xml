@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>fxz-gateway</artifactId>
-    <name>fxz-gateway</name>
+    <description>fxz-gateway</description>
 
     <dependencies>
 
