@@ -16,6 +16,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class JobLogDto extends JobLog {
 
-	private static final long serialVersionUID = -2784035579026358236L;
+    private static final Long serialVersionUID = -1L;
 
 }

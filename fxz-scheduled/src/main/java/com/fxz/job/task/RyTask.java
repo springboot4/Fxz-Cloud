@@ -12,15 +12,15 @@ import org.springframework.stereotype.Component;
 @Component("fxzTask")
 public class RyTask {
 
-	public void fxzMultipleParams(String s, Boolean b, Long l, Double d, Integer i) {
+	public void fxzMultipleParamsTask(String s, Boolean b, Long l, Double d, Integer i) {
 		log.info("执行多参方法:{},{},{},{},{}", s, b, l, d, i);
 	}
 
-	public void fxzParams(String params) {
+	public void fxzParamsTask(String params) {
 		log.info("执行有参方法：{}", params);
 	}
 
-	public void fxzNoParams() {
+	public void fxzNoParamsTask() {
 		log.info("执行无参方法");
 	}
 

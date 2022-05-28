@@ -16,6 +16,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SysJobDto extends SysJob {
 
-	private static final long serialVersionUID = -7033528451370559565L;
+    private static final Long serialVersionUID = -1L;
 
 }

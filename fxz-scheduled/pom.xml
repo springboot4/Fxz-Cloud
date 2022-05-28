@@ -10,7 +10,7 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fxz-Job</artifactId>
+    <artifactId>fxz-scheduled</artifactId>
     <description>Quartz定时任务模块</description>
 
     <dependencies>

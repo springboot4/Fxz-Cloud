@@ -15,7 +15,8 @@
         <module>fxz-gateway</module>
         <module>fxz-system</module>
         <module>fxz-generate</module>
-        <module>fxz-Job</module>
+        <module>fxz-scheduled</module>
+        <module>fxz-laboratory</module>
     </modules>
 
     <properties>
