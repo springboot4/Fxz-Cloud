@@ -10,4 +10,10 @@ public interface RegexpConstant {
 	 */
 	public static final String MOBILE_REG = "[1]\\d{10}";
 
+	/**
+	 * http协议正则
+	 */
+	public static final String HTTP_PROTOCOL_REGEXP = "^((http[s]{0,1})://)";
+
+
 }
