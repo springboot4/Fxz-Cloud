@@ -34,7 +34,7 @@ public class FxzMemberUserDetailsServiceImpl implements FxzUserDetailsService {
 		Member systemUser = memberFeignClient.loadUserByMobile(mobile, SecurityConstants.FROM_IN).getData();
 
 		if (Objects.nonNull(systemUser)) {
-			FxzAuthUser authUser = new FxzAuthUser(systemUser.getNickName(), systemUser.getPassword(), true, true, true,
+			FxzAuthUser authUser = new FxzAuthUser(systemUser.getNickName(), systemUser.getMobile(), true, true, true,
 					true, AuthorityUtils.commaSeparatedStringToAuthorityList(null));
 
 			BeanUtils.copyProperties(systemUser, authUser);
