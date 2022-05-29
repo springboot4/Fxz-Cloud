@@ -10,6 +10,7 @@ spring:
   config:
     import:
       - optional:nacos:${spring.application.name}.yaml
+      - optional:nacos:fxz-application-common.yaml
   servlet:
     multipart:
       max-file-size: 10MB
