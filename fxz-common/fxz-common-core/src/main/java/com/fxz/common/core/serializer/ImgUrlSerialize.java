@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class ImgUrlSerialize extends JsonSerializer<String> implements ContextualSerializer {
 
     @Value("${biz.oss.resources-url}")
-    private String imgDomain = "http://localhost:8301";
+    private String imgDomain ;
 
     @Override
     public void serialize(String value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
