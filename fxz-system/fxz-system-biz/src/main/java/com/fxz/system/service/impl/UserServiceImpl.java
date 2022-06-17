@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fxz.common.core.param.PageParam;
 import com.fxz.system.entity.*;
 import com.fxz.system.mapper.UserMapper;
-import com.fxz.system.param.UserInfoParam;
+import com.fxz.system.dto.UserInfoDto;
 import com.fxz.system.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -45,7 +45,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SystemUser> impleme
 	private final PasswordEncoder passwordEncoder;
 
 	@Override
-	public IPage<SystemUser> findUserDetail(UserInfoParam user, PageParam pageParam) {
+	public IPage<SystemUser> findUserDetail(UserInfoDto user, PageParam pageParam) {
 		Page<SystemUser> page = new Page<>(pageParam.getCurrent(), pageParam.getSize());
 		return this.baseMapper.findUserDetailPage(page, user);
 	}

@@ -15,5 +15,4 @@ public interface RegexpConstant {
 	 */
 	public static final String HTTP_PROTOCOL_REGEXP = "^((http[s]{0,1})://)";
 
-
 }

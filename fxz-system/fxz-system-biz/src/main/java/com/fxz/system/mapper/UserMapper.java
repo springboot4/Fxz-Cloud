@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fxz.system.entity.SystemUser;
-import com.fxz.system.param.UserInfoParam;
+import com.fxz.system.dto.UserInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,7 +23,7 @@ public interface UserMapper extends BaseMapper<SystemUser> {
 	 * @return Ipage
 	 */
 	@SuppressWarnings("all")
-	IPage<SystemUser> findUserDetailPage(Page page, @Param("user") UserInfoParam user);
+	IPage<SystemUser> findUserDetailPage(Page page, @Param("user") UserInfoDto user);
 
 	/**
 	 * 根据用户id获取用户信息

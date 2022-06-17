@@ -12,6 +12,6 @@ import java.util.List;
 @Data
 public class RabbitModuleProperties {
 
-    private List<RabbitModuleInfo> modules;
+	private List<RabbitModuleInfo> modules;
 
 }

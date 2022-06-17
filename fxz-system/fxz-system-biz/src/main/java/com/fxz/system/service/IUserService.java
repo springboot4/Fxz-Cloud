@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.fxz.common.core.param.PageParam;
 import com.fxz.system.entity.SystemUser;
 import com.fxz.system.entity.UserInfo;
-import com.fxz.system.param.UserInfoParam;
+import com.fxz.system.dto.UserInfoDto;
 
 /**
  * @author Fxz
@@ -20,7 +20,7 @@ public interface IUserService extends IService<SystemUser> {
 	 * @param user 用户查询对象，用于传递查询条件
 	 * @return IPage
 	 */
-	IPage<SystemUser> findUserDetail(UserInfoParam user, PageParam page);
+	IPage<SystemUser> findUserDetail(UserInfoDto user, PageParam page);
 
 	/**
 	 * 新增用户

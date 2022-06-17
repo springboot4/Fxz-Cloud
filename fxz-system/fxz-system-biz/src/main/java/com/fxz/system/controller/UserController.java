@@ -14,7 +14,7 @@ import com.fxz.mall.user.entity.Member;
 import com.fxz.mall.user.feign.RemoteMemberService;
 import com.fxz.system.entity.SystemUser;
 import com.fxz.system.entity.UserInfo;
-import com.fxz.system.param.UserInfoParam;
+import com.fxz.system.dto.UserInfoDto;
 import com.fxz.system.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,8 +45,8 @@ public class UserController {
 
 	@GetMapping
 	@PreAuthorize("@pms.hasPermission('sys:user:view')")
-	public Result<PageResult<SystemUser>> userList(PageParam pageParam, UserInfoParam userInfoParam) {
-		return Result.success(PageResult.success(userService.findUserDetail(userInfoParam, pageParam)));
+	public Result<PageResult<SystemUser>> userList(PageParam pageParam, UserInfoDto userInfoDto) {
+		return Result.success(PageResult.success(userService.findUserDetail(userInfoDto, pageParam)));
 	}
 
 	@PostMapping

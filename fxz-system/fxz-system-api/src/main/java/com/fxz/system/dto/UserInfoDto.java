@@ -1,4 +1,4 @@
-package com.fxz.system.param;
+package com.fxz.system.dto;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  * @date 2022-02-27 12:25
  */
 @Data
-public class UserInfoParam implements Serializable {
+public class UserInfoDto implements Serializable {
 
 	private static final long serialVersionUID = -6220014292300727768L;
 
