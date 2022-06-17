@@ -16,7 +16,6 @@
     <!--https://github.com/pig-mesh/oss-spring-boot-starter-->
     <!--pig是最nb的微服务框架-->
 
-
     <dependencies>
         <dependency>
             <groupId>com.amazonaws</groupId>

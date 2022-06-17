@@ -3,6 +3,9 @@ package com.fxz.common.file;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * @author fxz
+ */
 @Data
 @ConfigurationProperties(prefix = "oss")
 public class OssProperties {

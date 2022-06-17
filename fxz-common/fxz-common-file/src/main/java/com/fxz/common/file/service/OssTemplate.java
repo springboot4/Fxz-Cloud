@@ -24,6 +24,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * @author fxz
+ */
 @RequiredArgsConstructor
 public class OssTemplate implements InitializingBean {
 
