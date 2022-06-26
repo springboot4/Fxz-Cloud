@@ -15,7 +15,7 @@
 
         <dependency>
             <groupId>com.fxz</groupId>
-            <artifactId>mall-user-api</artifactId>
+            <artifactId>mall-member-api</artifactId>
             <version>0.0.1</version>
         </dependency>
 

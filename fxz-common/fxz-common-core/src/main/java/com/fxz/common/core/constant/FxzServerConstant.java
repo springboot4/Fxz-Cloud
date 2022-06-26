@@ -25,6 +25,6 @@ public interface FxzServerConstant {
 
 	public static final String FXZ_MALL_ORDER = "fxz-mall-order";
 
-	public static final String FXZ_MALL_USER = "fxz-mall-user";
+	public static final String FXZ_MALL_MEMBER = "fxz-mall-member";
 
 }

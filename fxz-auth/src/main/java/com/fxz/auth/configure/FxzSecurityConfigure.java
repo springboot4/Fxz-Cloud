@@ -5,7 +5,7 @@ import com.fxz.auth.extension.mobile.FxzSmsCodeAuthenticationProvider;
 import com.fxz.auth.extension.wechat.FxzWechatAuthenticationProvider;
 import com.fxz.auth.service.member.FxzMemberUserDetailsServiceImpl;
 import com.fxz.auth.service.user.FxzUserDetailServiceImpl;
-import com.fxz.mall.user.feign.RemoteMemberService;
+import com.fxz.mall.member.feign.RemoteMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;

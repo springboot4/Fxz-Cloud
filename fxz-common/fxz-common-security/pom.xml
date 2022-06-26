@@ -13,35 +13,43 @@
     <description>Oauth2安全模块</description>
 
     <dependencies>
+
         <dependency>
             <groupId>com.fxz</groupId>
             <artifactId>fxz-system-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.fxz</groupId>
-            <artifactId>mall-user-api</artifactId>
+            <artifactId>mall-member-api</artifactId>
             <version>0.0.1</version>
         </dependency>
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-extra</artifactId>
         </dependency>
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-json</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.fxz</groupId>
             <artifactId>fxz-common-core</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>
