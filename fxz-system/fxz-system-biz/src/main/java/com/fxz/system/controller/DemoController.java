@@ -1,8 +1,6 @@
 package com.fxz.system.controller;
 
 import cn.hutool.extra.servlet.ServletUtil;
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fxz.common.Idempotent.annotation.Idempotent;
 import com.fxz.common.Idempotent.keyresolver.impl.ExpressionIdempotentKeyResolver;
 import com.fxz.common.core.exception.ErrorCodes;
@@ -12,20 +10,17 @@ import com.fxz.common.security.annotation.Ojbk;
 import com.fxz.common.security.entity.FxzAuthUser;
 import com.fxz.common.security.util.SecurityUtil;
 import com.fxz.common.sequence.service.Sequence;
+import com.fxz.common.websocket.service.UserWsNoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 /**
  * @author Fxz
@@ -41,6 +36,15 @@ public class DemoController {
 	private final Sequence fxzSequence;
 
 	private final Sequence cloudSequence;
+
+	private final UserWsNoticeService userWsNoticeService;
+
+	@Ojbk
+	@GetMapping("/websocket")
+	public Result<Void> websocket() {
+		userWsNoticeService.sendMessageByAll("全体起立！");
+		return Result.success();
+	}
 
 	@SneakyThrows
 	@Ojbk

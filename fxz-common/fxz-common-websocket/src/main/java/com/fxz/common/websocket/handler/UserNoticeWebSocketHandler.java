@@ -2,6 +2,7 @@ package com.fxz.common.websocket.handler;
 
 import com.fxz.common.websocket.manager.WebSocketSessionManager;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -17,6 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version 1.0
  * @date 2022/6/28 09:49
  */
+@Component
 @Slf4j
 public class UserNoticeWebSocketHandler extends TextWebSocketHandler {
 
@@ -37,7 +39,8 @@ public class UserNoticeWebSocketHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) {
 		Long userId = (Long) session.getAttributes().get("userId");
 		wsManager.addSession(String.valueOf(userId), session);
-		ONLINE_COUNT.incrementAndGet(); // 在线数加1
+		// 在线数加1
+		ONLINE_COUNT.incrementAndGet();
 		log.info("有新连接加入：{}，当前在线人数为：{}", userId, ONLINE_COUNT.get());
 	}
 
