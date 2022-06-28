@@ -16,6 +16,7 @@ import java.time.ZoneOffset;
  *
  * @author fxz
  */
+@SuppressWarnings("all")
 @RequiredArgsConstructor
 @Component
 @Slf4j

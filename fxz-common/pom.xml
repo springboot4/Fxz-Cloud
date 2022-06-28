@@ -30,6 +30,7 @@
         <module>fxz-common-sequence</module>
         <module>fxz-common-es</module>
         <module>fxz-common-canal</module>
+        <module>fxz-common-websocket</module>
     </modules>
 
 </project>
