@@ -2,30 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
+        <artifactId>fxz-common-mq</artifactId>
         <groupId>com.fxz</groupId>
-        <artifactId>fxz-system</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fxz-system-api</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>fxz-common-mq-redis</artifactId>
+    <description>基于redis的stream类型实现的轻量级消息队列</description>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-redis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-mq-redis</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-system</artifactId>
         </dependency>
 
     </dependencies>

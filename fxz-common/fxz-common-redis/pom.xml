@@ -25,7 +25,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!--引入redis需要引入commons-pool2-->
+        <!--引入redis需要引入commons-pool2连接池-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>

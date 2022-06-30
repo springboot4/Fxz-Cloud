@@ -23,7 +23,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 public class RedisTemplateConfig {
 
 	/**
-	 * 创建 RedisTemplate Bean，使用 JSON 序列化方式
+	 * 创建 RedisTemplate Bean，设置序列化方式
 	 */
 	@Primary
 	@Bean
@@ -34,7 +34,7 @@ public class RedisTemplateConfig {
 		// 设置 RedisConnection 工厂。
 		template.setConnectionFactory(factory);
 
-		// 使用 String 序列化方式，序列化 KEY 。
+		// 默认使用了jdk的序列化方式，可读性差，我们使用 String 序列化方式，序列化 KEY 。
 		template.setKeySerializer(RedisSerializer.string());
 		template.setHashKeySerializer(RedisSerializer.string());
 

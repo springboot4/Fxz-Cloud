@@ -81,6 +81,11 @@
             </dependency>
             <dependency>
                 <groupId>com.fxz</groupId>
+                <artifactId>fxz-common-mq-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fxz</groupId>
                 <artifactId>fxz-common-mq-rabbit</artifactId>
                 <version>${project.version}</version>
             </dependency>

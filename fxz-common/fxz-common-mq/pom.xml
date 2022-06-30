@@ -15,6 +15,7 @@
 
     <modules>
         <module>fxz-common-mq-rabbit</module>
+        <module>fxz-common-mq-redis</module>
     </modules>
 
 </project>
