@@ -29,7 +29,7 @@ fxz-cloud
        ├── fxz-common-seata -- 分布式事务
        ├── fxz-common-security -- 安全模块
        ├── fxz-common-sequence -- 发号器（序列号生成器）
-       ├── fxz-common-sma -- 阿里云短信服务
+       ├── fxz-common-sms -- 阿里云短信服务
        ├── fxz-common-websocket  -- websocket
     ├── fxz-gateway -- 网关模块
     ├── fxz-generate -- 代码生成器
