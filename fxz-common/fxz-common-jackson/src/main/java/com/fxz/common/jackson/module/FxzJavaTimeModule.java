@@ -19,6 +19,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @author fxz
+ */
 public class FxzJavaTimeModule extends SimpleModule {
 
 	private static final long serialVersionUID = -1L;

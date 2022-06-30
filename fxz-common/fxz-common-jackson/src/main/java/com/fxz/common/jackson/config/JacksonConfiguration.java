@@ -16,6 +16,9 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.TimeZone;
 
+/**
+ * @author fxz
+ */
 @AutoConfiguration
 @ConditionalOnClass(ObjectMapper.class)
 @AutoConfigureBefore(JacksonAutoConfiguration.class)

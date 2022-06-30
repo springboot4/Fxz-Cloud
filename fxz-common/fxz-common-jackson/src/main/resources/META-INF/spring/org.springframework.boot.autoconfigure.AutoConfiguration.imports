@@ -1,1 +1,2 @@
 com.fxz.common.jackson.config.JacksonConfiguration
+com.fxz.common.jackson.config.JacksonUtilsConfiguration
