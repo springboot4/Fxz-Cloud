@@ -41,7 +41,7 @@ fxz-cloud
 ```
 🚀java交流群
 
-qq:932249645
+qq群:932249645
 <p>
 <img src="https://minio.pigx.vip/oss/2022/07/FcAxsd.jpg" width = "330" height = "500"/>
 </p>
