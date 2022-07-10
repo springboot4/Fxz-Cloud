@@ -11,6 +11,8 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.util.Assert;
 
 /**
+ * 幂等性切面
+ *
  * @author Fxz
  * @version 1.0
  * @date 2022-04-11 21:22
@@ -26,7 +28,7 @@ public class IdempotentAspect {
 	}
 
 	/**
-	 * 对带有Idempotent注解的进行幂等处理
+	 * 对带有Idempotent注解的进行幂等处理，使用前置通知
 	 */
 	@Before("@annotation(idempotent)")
 	public void beforePointCut(JoinPoint joinPoint, Idempotent idempotent) {

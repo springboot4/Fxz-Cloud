@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author fxz
  * <p>
- * 内部服务调用是否鉴权Aop处理
+ * 内部服务调用是否鉴权切面
  */
 @SuppressWarnings("all")
 @Slf4j
@@ -28,6 +28,12 @@ public class SecurityInnerAspect implements Ordered {
 
 	private final HttpServletRequest request;
 
+	/**
+	 * 环绕处理Ojbk注解，判断是否为服务内部调用
+	 * @param point
+	 * @param ojbk
+	 * @return
+	 */
 	@SneakyThrows
 	@Around("@within(ojbk) || @annotation(ojbk)")
 	public Object around(ProceedingJoinPoint point, Ojbk ojbk) {

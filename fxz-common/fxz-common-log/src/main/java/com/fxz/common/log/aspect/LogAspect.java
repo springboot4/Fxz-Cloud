@@ -24,7 +24,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * 操作日志记录处理
+ * 操作日志记录处理切面
  *
  * @author ruoyi
  */
@@ -36,7 +36,7 @@ public class LogAspect {
 	private AsyncLogService asyncLogService;
 
 	/**
-	 * 环绕处理OperLog注解
+	 * 处理OperLog注解，使用环绕通知
 	 */
 	@Around("@annotation(operLogAnn)")
 	public Result<Object> around(ProceedingJoinPoint point, OperLogAnn operLogAnn) {
