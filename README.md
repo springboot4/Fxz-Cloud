@@ -25,7 +25,7 @@ fxz-cloud
        ├── fxz-common-mq -- 消息队列封装
           ├── fxz-common-mq-rabbit -- rabbitMq消息队列
           ├── fxz-common-mq-redis -- redis轻量级消息队列
-       ├── fxz-common-redis -- 缓存、分布式锁模块
+       ├── fxz-common-redis -- 多级缓存、分布式锁模块
        ├── fxz-common-seata -- 分布式事务
        ├── fxz-common-security -- 安全模块
        ├── fxz-common-sequence -- 发号器（序列号生成器）

@@ -75,7 +75,7 @@ public class FxzUserInfoTokenServices implements ResourceServerTokenServices {
 		Map<String, Object> map = getMap(this.userInfoEndpointUrl, accessToken);
 		if (map.containsKey("error")) {
 			if (this.logger.isDebugEnabled()) {
-				this.logger.debug("userinfo returned error: " + map.get("error"));
+				this.logger.info("userinfo returned error: " + map.get("error"));
 			}
 			throw new InvalidTokenException(accessToken);
 		}
@@ -119,7 +119,7 @@ public class FxzUserInfoTokenServices implements ResourceServerTokenServices {
 	@SuppressWarnings({ "unchecked" })
 	private Map<String, Object> getMap(String path, String accessToken) {
 		if (this.logger.isDebugEnabled()) {
-			this.logger.debug("Getting user info from: " + path);
+			this.logger.info("Getting user info from: " + path);
 		}
 		try {
 			OAuth2RestOperations restTemplate = this.restTemplate;
