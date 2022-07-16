@@ -7,22 +7,23 @@ import com.fxz.common.core.exception.ErrorCodes;
 import com.fxz.common.core.utils.MsgUtils;
 import com.fxz.common.mp.result.Result;
 import com.fxz.common.mq.redis.core.RedisMQTemplate;
+import com.fxz.common.redis.cache.support.CacheMessage;
 import com.fxz.common.security.annotation.Ojbk;
 import com.fxz.common.security.entity.FxzAuthUser;
 import com.fxz.common.security.util.SecurityUtil;
 import com.fxz.common.sequence.service.Sequence;
 import com.fxz.common.websocket.service.UserWsNoticeService;
-import com.fxz.system.entity.TestMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.connection.stream.RecordId;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -46,15 +47,18 @@ public class DemoController {
 	private final RedisMQTemplate redisMQTemplate;
 
 	@Ojbk
-	@GetMapping("/redis/stream/send")
-	public Result<RecordId> redisMqTest() {
-		TestMessage message = new TestMessage();
-		message.setMessage("message...");
-		message.setAge(1);
-		message.setId(0L);
-		message.setList(new ArrayList<>());
-		RecordId send = redisMQTemplate.send(message);
-		return Result.success(send);
+	@CacheEvict(value = "demo", key = "#id")
+	@GetMapping("/cache/evict")
+	public Result<String> CacheEvict(Long id) {
+		redisMQTemplate.send(new CacheMessage());
+		return Result.success(id.toString());
+	}
+
+	@Ojbk
+	@Cacheable(value = "demo", key = "#id")
+	@GetMapping("/cache/demo")
+	public Result<String> get(Long id) {
+		return Result.success(id.toString());
 	}
 
 	@Ojbk

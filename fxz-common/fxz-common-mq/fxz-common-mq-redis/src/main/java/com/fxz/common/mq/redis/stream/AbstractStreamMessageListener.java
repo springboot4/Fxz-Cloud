@@ -8,6 +8,7 @@ import com.fxz.common.mq.redis.message.AbstractRedisMessage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.connection.stream.ObjectRecord;
 import org.springframework.data.redis.stream.StreamListener;
@@ -21,6 +22,7 @@ import java.util.List;
  * @param <T> 消息类型。一定要填写，不然会报错
  * @author fxz
  */
+@Slf4j
 public abstract class AbstractStreamMessageListener<T extends AbstractStreamMessage>
 		implements StreamListener<String, ObjectRecord<String, String>> {
 
@@ -59,6 +61,7 @@ public abstract class AbstractStreamMessageListener<T extends AbstractStreamMess
 		// 消费消息
 		T messageObj = JacksonUtil.parseObject(message.getValue(), messageType);
 		try {
+			log.info("message:{}", message);
 			consumeMessageBefore(messageObj);
 			// 消费消息
 			this.onMessage(messageObj);
