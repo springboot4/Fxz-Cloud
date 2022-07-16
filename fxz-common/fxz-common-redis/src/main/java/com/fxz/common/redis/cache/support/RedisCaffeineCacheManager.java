@@ -35,7 +35,7 @@ public class RedisCaffeineCacheManager implements CacheManager {
 	private Set<String> cacheNames;
 
 	public RedisCaffeineCacheManager(CacheRedisCaffeineProperties cacheRedisCaffeineProperties,
-			RedisTemplate<String, Object> redisTemplate, RedisMQTemplate redisMQTemplate) {
+			RedisTemplate redisTemplate, RedisMQTemplate redisMQTemplate) {
 		this.cacheRedisCaffeineProperties = cacheRedisCaffeineProperties;
 		this.stringKeyRedisTemplate = redisTemplate;
 		this.redisMQTemplate = redisMQTemplate;

@@ -1,5 +1,20 @@
 package com.fxz.common.redis.cache.support;
 
+import cn.hutool.core.date.DatePattern;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.fxz.common.mq.redis.core.RedisMQTemplate;
 import com.fxz.common.redis.cache.properties.CacheRedisCaffeineProperties;
 import com.github.benmanes.caffeine.cache.Cache;
@@ -8,9 +23,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.support.AbstractValueAdaptingCache;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.StringUtils;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -21,6 +42,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author fxz
  */
+@SuppressWarnings("all")
 @Slf4j
 public class RedisCaffeineCache extends AbstractValueAdaptingCache {
 
@@ -50,12 +72,56 @@ public class RedisCaffeineCache extends AbstractValueAdaptingCache {
 		super(cacheRedisCaffeineProperties.isCacheNullValues());
 		this.name = name;
 		this.redisMQTemplate = redisMQTemplate;
-		this.stringKeyRedisTemplate = stringKeyRedisTemplate;
+		this.stringKeyRedisTemplate = buildRedisTemplate(stringKeyRedisTemplate);
 		this.caffeineCache = caffeineCache;
 		this.cachePrefix = cacheRedisCaffeineProperties.getCachePrefix();
 		this.defaultExpiration = cacheRedisCaffeineProperties.getRedis().getDefaultExpiration();
 		this.expires = cacheRedisCaffeineProperties.getRedis().getExpires();
 		this.topic = cacheRedisCaffeineProperties.getRedis().getTopic();
+	}
+
+	public RedisTemplate buildRedisTemplate(RedisTemplate redisTemplate) {
+		// 使用 JSON 序列化方式（库是 Jackson ），序列化 VALUE 。
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+		objectMapper.registerModule(createJavaTimeModule());
+		// ObjectMapper.DefaultTyping.NON_FINAL指定序列化输入的类型
+		objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
+				JsonTypeInfo.As.WRAPPER_ARRAY);
+
+		GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(objectMapper);
+		redisTemplate.setValueSerializer(serializer);
+		redisTemplate.setHashValueSerializer(serializer);
+
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+
+		return redisTemplate;
+	}
+
+	private JavaTimeModule createJavaTimeModule() {
+		JavaTimeModule javaTimeModule = new JavaTimeModule();
+
+		// yyyy-MM-dd HH:mm:ss
+		javaTimeModule.addSerializer(LocalDateTime.class,
+				new LocalDateTimeSerializer(DatePattern.NORM_DATETIME_FORMATTER));
+		// yyyy-MM-dd
+		javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ISO_LOCAL_DATE));
+		// HH:mm:ss
+		javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ISO_LOCAL_TIME));
+		// Instant 类型序列化
+		javaTimeModule.addSerializer(Instant.class, InstantSerializer.INSTANCE);
+
+		// yyyy-MM-dd HH:mm:ss
+		javaTimeModule.addDeserializer(LocalDateTime.class,
+				new LocalDateTimeDeserializer(DatePattern.NORM_DATETIME_FORMATTER));
+		// yyyy-MM-dd
+		javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ISO_LOCAL_DATE));
+		// HH:mm:ss
+		javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ISO_LOCAL_TIME));
+		// Instant 反序列化
+		javaTimeModule.addDeserializer(Instant.class, InstantDeserializer.INSTANT);
+
+		return javaTimeModule;
 	}
 
 	/**
@@ -148,12 +214,14 @@ public class RedisCaffeineCache extends AbstractValueAdaptingCache {
 
 	private void doPut(Object key, Object value) {
 		long expire = getExpire();
+
 		if (expire > 0) {
 			stringKeyRedisTemplate.opsForValue().set(getKey(key.toString()), toStoreValue(value), expire,
 					TimeUnit.MILLISECONDS);
 		}
 		else {
-			stringKeyRedisTemplate.opsForValue().set(getKey(key.toString()), toStoreValue(value));
+			Object o = toStoreValue(value);
+			stringKeyRedisTemplate.opsForValue().set(getKey(key.toString()), o);
 		}
 
 		push(new CacheMessage(this.name, key));
@@ -200,7 +268,6 @@ public class RedisCaffeineCache extends AbstractValueAdaptingCache {
 			return value;
 		}
 
-		stringKeyRedisTemplate.setKeySerializer(new StringRedisSerializer());
 		value = stringKeyRedisTemplate.opsForValue().get(cacheKey);
 
 		if (value != null) {

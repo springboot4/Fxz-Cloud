@@ -24,8 +24,7 @@ public class CacheRedisCaffeineAutoConfiguration {
 	private CacheRedisCaffeineProperties cacheRedisCaffeineProperties;
 
 	@Bean
-	public RedisCaffeineCacheManager cacheManager(RedisTemplate<String, Object> redisTemplate,
-			RedisMQTemplate redisMQTemplate) {
+	public RedisCaffeineCacheManager cacheManager(RedisTemplate redisTemplate, RedisMQTemplate redisMQTemplate) {
 		return new RedisCaffeineCacheManager(cacheRedisCaffeineProperties, redisTemplate, redisMQTemplate);
 	}
 

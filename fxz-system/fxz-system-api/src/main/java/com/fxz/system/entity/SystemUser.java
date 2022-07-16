@@ -32,6 +32,8 @@ import java.util.Date;
 @TableName("sys_user")
 public class SystemUser extends BaseEntity implements Serializable {
 
+	private static final Long serialVersionUID = -1L;
+
 	/**
 	 * 用户状态：有效
 	 */

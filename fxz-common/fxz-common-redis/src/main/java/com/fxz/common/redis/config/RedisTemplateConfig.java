@@ -1,6 +1,6 @@
 package com.fxz.common.redis.config;
 
-import com.fxz.common.mq.redis.core.RedisMQTemplate;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fxz.common.redis.service.RedisService;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -32,7 +32,7 @@ public class RedisTemplateConfig {
 	@Primary
 	@Bean
 	@ConditionalOnClass(RedisOperations.class)
-	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory, ObjectMapper objectMapper) {
 		// 创建 RedisTemplate 对象
 		RedisTemplate<String, Object> template = new RedisTemplate<>();
 		// 设置 RedisConnection 工厂。
