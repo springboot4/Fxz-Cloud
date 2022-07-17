@@ -24,15 +24,17 @@ public class UserNoticeWebSocketInterceptor implements HandshakeInterceptor {
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) {
 		log.info("websocket鉴权");
+
 		// 由于 WebSocket 握手是由 http 升级的，携带 token 已经被 Security 拦截验证了，所以可以直接获取到用户
 		Long userId = SecurityUtil.getUser().getUserId();
 		log.info("userid:{}", userId);
 
 		if (Objects.isNull(userId)) {
-			return Boolean.FALSE;
+			return false;
 		}
+
 		attributes.put("userId", userId);
-		return Boolean.TRUE;
+		return true;
 	}
 
 	@Override
