@@ -13,10 +13,11 @@ fxz-cloud
     ├── _config -- 数据库相关配置
     ├── fxz-auth -- 认证服务器
     ├── fxz-common -- 通用工具封装
-       ├── fxz-common-bom -- 依赖管理
        ├── fxz-common-canal -- 针对canal封装
        ├── fxz-common-core -- web基础配置
        ├── fxz-common-data-permission 数据权限封装
+       ├── fxz-common-database 多数据源
+       ├── fxz-common-dependencies -- 依赖管理
        ├── fxz-common-es es配置
        ├── fxz-common-file 文件管理模块
        ├── fxz-common-idempotency -- 幂等控制组件

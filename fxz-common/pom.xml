@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>fxz-common-bom</module>
+        <module>fxz-common-dependencies</module>
         <module>fxz-common-mq</module>
         <module>fxz-common-mp</module>
         <module>fxz-common-log</module>

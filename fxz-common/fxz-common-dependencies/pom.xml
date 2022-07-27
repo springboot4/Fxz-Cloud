@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
     <groupId>com.fxz</groupId>
     <description>依赖管理</description>
-    <artifactId>fxz-common-bom</artifactId>
+    <artifactId>fxz-common-dependencies</artifactId>
 
     <properties>
         <jakarta.version>2.0.1</jakarta.version>
