@@ -1,3 +1,4 @@
+大哥们路过麻烦给个star🙏
 ##  🍉项目介绍
 
   写着玩,采用微服务架构,致力于打造成全球最牛逼的后台权限管理框架。
@@ -39,6 +40,9 @@ fxz-cloud
        ├── fxz-system-biz -- 业务模块
     ├── fxz-z-laboratory -- 实验性模块
 ```
+🔨 快速启动
+https://gitee.com/fxzcloud/fxz-cloud/wikis/%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8
+
 🚀java交流群
 
 qq群:932249645
