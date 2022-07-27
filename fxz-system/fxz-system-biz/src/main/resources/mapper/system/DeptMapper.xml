@@ -22,6 +22,7 @@
         from sys_dept
         WHERE dept_id = #{pId}
     </select>
+
     <!--获取部门树-->
     <select id="getDeptTree" resultMap="dept">
         select dept_id,

@@ -89,7 +89,8 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 		if (sct == SqlCommandType.UPDATE || sct == SqlCommandType.DELETE) {
 			// 获得 Mapper 对应的数据权限的规则
 			List<DataPermissionRule> rules = ruleFactory.getDataPermissionRule(ms.getId());
-			if (mappedStatementCache.noRewritable(ms, rules)) { // 如果无需重写，则跳过
+			// 如果无需重写，则跳过
+			if (mappedStatementCache.noRewritable(ms, rules)) {
 				return;
 			}
 

@@ -15,63 +15,32 @@
 
         <dependency>
             <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-websocket</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-mq-rabbit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fxz</groupId>
             <artifactId>mall-member-api</artifactId>
             <version>0.0.1</version>
         </dependency>
 
         <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-es</artifactId>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
         </dependency>
 
+        <!--nacos配置中心-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
+        <!--nacos服务发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
+        <!--mysql链接-->
         <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-sequence</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-sms</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-jackson</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-data-permission</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-idempotent</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fxz</groupId>
-            <artifactId>fxz-common-log</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- LB 扩展 -->
@@ -80,32 +49,79 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
+        <!--接口api-->
         <dependency>
             <groupId>com.fxz</groupId>
             <artifactId>fxz-system-api</artifactId>
         </dependency>
 
+        <!--测试:es模块-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-es</artifactId>
+        </dependency>
+
+        <!--测试:发号器模块-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-sequence</artifactId>
+        </dependency>
+
+        <!--测试:websocket-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-websocket</artifactId>
+        </dependency>
+
+        <!--测试:rabbitmq-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-mq-rabbit</artifactId>
+        </dependency>
+
+        <!--阿里云短信服务-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-sms</artifactId>
+        </dependency>
+
+        <!--jackson序列化-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-jackson</artifactId>
+        </dependency>
+
+        <!--数据权限-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-data-permission</artifactId>
+        </dependency>
+
+        <!--id幂等性-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-idempotent</artifactId>
+        </dependency>
+
+        <!--日志-->
+        <dependency>
+            <groupId>com.fxz</groupId>
+            <artifactId>fxz-common-log</artifactId>
+        </dependency>
+
+        <!--文件存储-->
         <dependency>
             <groupId>com.fxz</groupId>
             <artifactId>fxz-common-file</artifactId>
         </dependency>
 
+        <!--多级缓存、分布式锁-->
         <dependency>
             <groupId>com.fxz</groupId>
             <artifactId>fxz-common-redis</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>p6spy</groupId>
-            <artifactId>p6spy</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
+        <!--安全模块-->
         <dependency>
             <groupId>com.fxz</groupId>
             <artifactId>fxz-common-security</artifactId>
@@ -122,6 +138,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
