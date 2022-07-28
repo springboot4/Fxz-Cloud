@@ -1,5 +1,5 @@
 seata:
-  enabled: true
+  enabled: true #是否开启springboot自动装配
   tx-service-group: fxz_tx_group # 事务群组（可以每个应用独立取名，也可以使用相同的名字）
   client:
     rm-report-success-enable: true
@@ -14,18 +14,21 @@ seata:
     tm-commit-retry-count: 3 # 一阶段全局提交结果上报TC重试次数（默认1次，建议大于1）
     tm-rollback-retry-count: 3 # 一阶段全局回滚结果上报TC重试次数（默认1次，建议大于1）
     undo:
+      data-validation: true # 二阶段回滚镜像校验（默认true开启）
       log-serialization: kryo # undo序列化方式（默认jackson 不支持 LocalDateTime）
       log-table: undo_log  # 自定义undo表名（默认undo_log）
+    log:
+      exceptionRate: 100 # 日志异常输出概率（默认100）
     support:
       spring:
-        datasource-autoproxy: true
+        datasource-autoproxy: true # 数据源自动代理开关
   service:
     vgroup-mapping:
       fxz_tx_group: default # TC 集群（必须与seata-server保持一致）
-    enable-degrade: false # 降级开关
+    enable-degrade: false # 降级开关,默认为false,业务侧根据连续错误自动降级，不走seata事务
     disable-global-transaction: false # 禁用全局事务（默认false）
     grouplist:
-      default: fxz-seata:8091
+      default: fxz-seata:8091 #TC服务列表，也就是seata服务端地址，只有当注册中心为fie时使用
   transport:
     shutdown:
       wait: 3
@@ -39,9 +42,9 @@ seata:
       client-worker-thread-prefix: NettyClientWorkerThread
     type: TCP
     server: NIO
-    heartbeat: true
-    serialization: seata
-    compressor: none
+    heartbeat: true #client和server通信心跳检测开关（默认true）
+    serialization: seata #client和server通信编解码方式
+    compressor: none #client和server通信数据压缩方式，包括none、gzip,默认为none
     enable-client-batch-send-request: true # 客户端事务消息请求是否批量合并发送（默认true）
   registry:
     file:
